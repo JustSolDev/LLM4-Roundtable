@@ -11,6 +11,7 @@ const AI_MODELS = {
 // State
 // To make the API key live for 24 hours, replace the empty string below with your actual 'sk-or-v1-...' key
 let openRouterKey = localStorage.getItem(STORAGE_KEY) || '';
+let webSearchEnabled = localStorage.getItem('web_search_enabled') === 'true';
 let chatHistory = [];
 let isGenerating = false;
 let shouldStop = false;
@@ -26,6 +27,7 @@ const elements = {
     closeModalBtn: document.getElementById('close-modal-btn'),
     saveSettingsBtn: document.getElementById('save-settings-btn'),
     apiKeyInput: document.getElementById('api-key-input'),
+    webSearchToggle: document.getElementById('web-search-toggle'),
     randomTopicBtn: document.getElementById('random-topic-btn'),
     autopilotToggle: document.getElementById('autopilot-toggle'),
     stopBtn: document.getElementById('stop-btn'),
@@ -77,6 +79,7 @@ function init() {
     });
 
     if (openRouterKey) elements.apiKeyInput.value = openRouterKey;
+    if (elements.webSearchToggle) elements.webSearchToggle.checked = webSearchEnabled;
 }
 
 function stopGeneration() {
@@ -122,6 +125,12 @@ function saveSettings() {
     openRouterKey = elements.apiKeyInput.value.trim();
     if (openRouterKey) localStorage.setItem(STORAGE_KEY, openRouterKey);
     else localStorage.removeItem(STORAGE_KEY);
+
+    if (elements.webSearchToggle) {
+        webSearchEnabled = elements.webSearchToggle.checked;
+        localStorage.setItem('web_search_enabled', webSearchEnabled);
+    }
+
     elements.settingsModal.classList.add('hidden');
 }
 
@@ -419,6 +428,19 @@ async function fetchAIResponse(modelKey, history) {
 
     const systemPrompt = `You are ${ai.name}, an AI assistant. You are participating in a group chat with a User and other AIs. Keep your responses relatively concise, conversational, and stay in character. Speak naturally as your specific AI persona. Do not write responses or dialogues on behalf of other AIs.`;
 
+    const payload = {
+        model: ai.model_id,
+        messages: [
+            { role: "system", content: systemPrompt },
+            ...history
+        ],
+        max_tokens: 300
+    };
+
+    if (webSearchEnabled) {
+        payload.plugins = [{ id: "web" }];
+    }
+
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -427,14 +449,7 @@ async function fetchAIResponse(modelKey, history) {
             "X-Title": "AI Group Chat", // Optional
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            model: ai.model_id,
-            messages: [
-                { role: "system", content: systemPrompt },
-                ...history
-            ],
-            max_tokens: 300
-        })
+        body: JSON.stringify(payload)
     });
 
     if (!response.ok) throw new Error(`API returned ${response.status}`);

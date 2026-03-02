@@ -226,8 +226,8 @@ body {
     background: rgba(255, 255, 255, 0.03);
     border-left: 3px solid transparent;
     height: 120px;
-    overflow-y: hidden;
-    /* Hide scrollbar by default until expanded */
+    overflow-y: auto;
+    /* Restored scrollability inside the box */
     flex-shrink: 0;
     position: relative;
     cursor: pointer;

@@ -158,10 +158,17 @@
                 <button id="close-modal-btn" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 1rem;">
                     <label for="api-key-input">OpenRouter API Key (Optional)</label>
                     <input type="password" id="api-key-input" placeholder="sk-or-v1-...">
                     <small class="help-text">Leave blank to use mock responses.</small>
+                </div>
+                <div class="form-group" style="display:flex; flex-direction:column; gap:4px;">
+                    <label for="web-search-toggle" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                        <input type="checkbox" id="web-search-toggle" style="width: auto; cursor:pointer;">
+                        <span style="color:var(--text-primary); font-size: 0.9rem;">Enable Real-Time Web Search</span>
+                    </label>
+                    <small class="help-text">Allows the AIs to pull breaking news from the live internet.</small>
                 </div>
             </div>
             <div class="modal-footer">
