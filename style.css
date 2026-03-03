@@ -527,11 +527,11 @@ body {
 }
 
 .avatar.chatgpt {
-    background-color: transparent !important;
+    background-color: #10a37f !important;
 }
 
 .avatar.claude {
-    background-color: transparent !important;
+    background-color: #EBD9CE !important;
 }
 
 .avatar.gemini {
