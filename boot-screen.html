@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ═══════════════════════════════════════════════════════════════
+  LLM4 BOOT SCREEN — boot-screen.html
+  ═══════════════════════════════════════════════════════════════
+  This file is OPTIONAL and completely self-contained.
+  It is NOT wired into the main app.html yet.
+
+  To add it: see AGENT_NOTES.md → "OPTIONAL: Boot Screen"
+  To preview it: open this file directly in a browser.
+  ═══════════════════════════════════════════════════════════════
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM4 — Boot</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #080810;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Courier New', 'Share Tech Mono', monospace;
+        }
+
+        .boot-logo {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: #fff;
+            margin-bottom: 32px;
+        }
+        .boot-logo span { color: #6366f1; }
+
+        .boot-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-width: 520px;
+            width: 100%;
+            padding: 0 24px;
+        }
+
+        .boot-line {
+            font-size: 11px;
+            line-height: 1.8;
+            display: flex;
+            gap: 10px;
+            animation: bootFadeIn 0.18s ease;
+        }
+        .boot-idx   { color: #2d2d4e; min-width: 36px; }
+        .boot-ok    { color: #6366f1; }
+        .boot-warn  { color: #f59e0b; }
+        .boot-dim   { color: #3a3a5e; }
+        .boot-bright { color: #a5b4fc; font-weight: 700; letter-spacing: 1px; }
+
+        .boot-cursor {
+            color: #6366f1;
+            margin-top: 10px;
+            padding-left: 46px;
+            font-size: 11px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes bootFadeIn {
+            from { opacity: 0; transform: translateX(-4px); }
+            to   { opacity: 1; transform: none; }
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    </style>
+</head>
+<body>
+
+<div class="boot-logo">LLM<span>4</span></div>
+<div id="boot-lines" class="boot-lines"></div>
+<div id="boot-cursor" class="boot-cursor" style="display:none">█</div>
+
+<script>
+    const BOOT_LINES = [
+        { text: 'INITIALIZING NEURAL SUBSTRATE...',        cls: 'boot-ok'     },
+        { text: 'LOADING AGENT PERSONALITIES... [4 FOUND]', cls: 'boot-ok'   },
+        { text: 'ESTABLISHING INTER-AGENT CHANNELS...',    cls: 'boot-ok'     },
+        { text: 'AGENT AWARENESS PROTOCOL: ██ ACTIVE',     cls: 'boot-ok'     },
+        { text: '⚠  WARNING: CONFLICT PROTOCOLS ENABLED',  cls: 'boot-warn'   },
+        { text: 'VOICE MODULE: STANDING BY',               cls: 'boot-dim'    },
+        { text: 'VISION MODULE: STANDING BY',              cls: 'boot-dim'    },
+        { text: 'SECURITY: ZERO-PERSIST KEY MODE ACTIVE',  cls: 'boot-ok'     },
+        { text: 'CONSENSUS ENGINE: CALIBRATED [OK]',       cls: 'boot-ok'     },
+        { text: '>>> LLM4 ROUNDTABLE v3.1 — ONLINE <<<',  cls: 'boot-bright' },
+    ];
+
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+    async function runBoot() {
+        const linesEl  = document.getElementById('boot-lines');
+        const cursorEl = document.getElementById('boot-cursor');
+
+        for (let i = 0; i < BOOT_LINES.length; i++) {
+            await sleep(i === BOOT_LINES.length - 1 ? 500 : 260);
+            const div = document.createElement('div');
+            div.className = `boot-line ${BOOT_LINES[i].cls}`;
+            div.innerHTML  = `<span class="boot-idx">[${String(i).padStart(2,'0')}]</span> ${BOOT_LINES[i].text}`;
+            linesEl.appendChild(div);
+        }
+
+        cursorEl.style.display = 'block';
+        await sleep(900);
+
+        /* Fade out */
+        document.body.style.transition = 'opacity 0.45s';
+        document.body.style.opacity    = '0';
+        await sleep(460);
+
+        /* ───────────────────────────────────────────────────
+           INTEGRATION POINT:
+           Replace the line below with your redirect target.
+           See AGENT_NOTES.md → "OPTIONAL: Boot Screen"
+        ─────────────────────────────────────────────────── */
+        window.location.href = 'app.html';
+    }
+
+    runBoot();
+</script>
+</body>
+</html>
