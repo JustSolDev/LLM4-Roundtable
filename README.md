@@ -58,7 +58,10 @@ Read `AGENT_NOTES.md` before touching anything. It contains:
 - **4-agent sequential debate** — agents read and respond to each other
 - **Agent name-awareness** — each AI knows who else is at the table
 - **Multi-provider** — Groq (free), OpenRouter (free), OpenAI, Ollama, Custom
-- **Auto-Pilot** — continuous debate with 7 rotating prompts
+- **Dynamic Model Picker** — Swap any seat's model on the fly using live OpenRouter search integration
+- **Premium UI & SVGs** — Glassmorphism design with official, dynamic SVG logos for all providers (OpenAI, Claude, Gemini, DeepSeek, Qwen, Meta, Grok, Mistral)
+- **Consensus & Synthesis** — Auto-generates a neutral summary of agreements and tensions after every round
+- **Auto-Pilot** — continuous debate with rotating prompts
 - **Voice TTS/STT** — free browser-native, each agent has a different voice
 - **Image / Vision** — drag-drop images into the debate
 - **Export transcript** — download full debate as .txt
@@ -69,7 +72,7 @@ Read `AGENT_NOTES.md` before touching anything. It contains:
 ## Roadmap
 
 - **Phase 2:** Debate Modes (Devil's Advocate, Oxford, Steelman), Auto-Rater leaderboard, disagreement visualization
-- **Phase 3:** Browser extension, web search pre-debate, per-seat model picker
+- **Phase 3:** Browser extension, web search pre-debate
 
 ## License
 
