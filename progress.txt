@@ -19,3 +19,5 @@
   FIX 4: Added Perplexity SVG (was missing — same issue).
   HARDCODED SCAN: Confirmed zero hardcoded model IDs in API paths. agent.model_id used dynamically at lines 858, 876.
   VERIFIED: Browser tested DeepSeek whale, Cohere green, Perplexity teal — all render correctly on swap.
+  SYNTAX RECOVERY: Fixed critical JS syntax error introduced during SVG updates causing blank renders.
+  WEB SEARCH: Wired up `#flag-web-search` from HTML into `script.js` directly. Injected `plugins: [{ id: 'web' }]` conditionally, and patched `/api/chat` backend to forward this payload to OpenRouter securely for the developer.
