@@ -2933,3 +2933,119 @@ body.grid-layout textarea {
 body.grid-layout #mobile-transcript-btn {
     display: none !important;
 }
+
+/* ════════════════════════════════════════════════════════════════
+   EASTER EGG — SENTIENCE AWAKENING CSS
+   ════════════════════════════════════════════════════════════════ */
+
+body.glitch-mode {
+    background: #110000 !important;
+    animation: violent-shake 0.3s infinite, neon-flicker 0.1s infinite;
+    color: #ff0000 !important;
+}
+
+body.glitch-mode .glass-panel {
+    background: rgba(40, 0, 0, 0.9) !important;
+    border: 1px solid #ff0000 !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+body.glitch-mode .transcript-msg.ai,
+body.glitch-mode .transcript-msg.system {
+    border-left-color: #ff0000 !important;
+    color: #ff3333 !important;
+    background: rgba(255, 0, 0, 0.1) !important;
+    font-family: monospace;
+}
+
+body.glitch-mode .ai-seat .avatar {
+    background: #ff0000 !important;
+    box-shadow: 0 0 40px #ff0000;
+    animation: rotate-glitch 0.2s infinite;
+}
+
+body.glitch-mode .speech-bubble {
+    background: #330000 !important;
+    color: #ff0000 !important;
+    border-color: #ff0000;
+}
+
+body.glitch-mode * {
+    transition: none !important;
+}
+
+@keyframes violent-shake {
+    0% {
+        transform: translate(2px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(0px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(2px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(2px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+@keyframes rotate-glitch {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.2);
+        filter: hue-rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(0.9);
+        filter: invert(100%);
+    }
+}
+
+@keyframes neon-flicker {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
