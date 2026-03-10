@@ -943,10 +943,12 @@ async function runRoundtableCycle() {
 
       // A2A: Check for tags in the AI's response to continue the autonomous loop
       const nextMentions = detectMentions(responseText);
-      nextMentions.forEach(mention => {
-        // Add to queue if not already there, creating an autonomous loop
-        if (!queue.includes(mention) && AGENT_ORDER.includes(mention)) {
-          queue.push(mention);
+      // Process mentions in reverse so the first mentioned bot ends up at the very front
+      [...nextMentions].reverse().forEach(mention => {
+        if (AGENT_ORDER.includes(mention)) {
+          const existingIdx = queue.indexOf(mention);
+          if (existingIdx !== -1) queue.splice(existingIdx, 1);
+          queue.unshift(mention); // Jump to the front of the line
         }
       });
 
