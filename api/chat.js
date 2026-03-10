@@ -140,7 +140,7 @@ const PROVIDER_CONFIG = {
   'x-ai': {
     url: 'https://api.x.ai/v1/chat/completions',
     keyEnv: 'XAI_API_KEY',
-    defaultModel: 'grok-3-mini',
+    defaultModel: 'grok-2-1212',
   },
   custom: {
     urlEnv: 'CUSTOM_API_URL',
@@ -314,7 +314,7 @@ export default async function handler(req, res) {
 
   // Strip provider metadata before returning — only send what browser needs
   Object.keys(corsHeaders).forEach(k => res.setHeader(k, corsHeaders[k]));
-    return res.status(200).json({
+  return res.status(200).json({
     choices: data.choices,
     usage: data.usage,
   });

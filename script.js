@@ -35,7 +35,7 @@ RULES: Max 3 sharp sentences. Under 60 words total. NEVER speak FOR other AIs or
   },
   grok: {
     id: 'grok', name: 'Grok',
-    model_id: 'x-ai/grok-3-mini',
+    model_id: 'x-ai/grok-2-1212',
     color: '#e0e0e0', ttsRate: 1.1, ttsPitch: 1.2,
     persona: (others) =>
       `You are Grok (xAI) — the Unfiltered Contrarian in this AI roundtable debate.
@@ -163,9 +163,9 @@ const SEAT_MODELS = {
     { id: 'google/gemini-2.5-pro-preview', label: 'Gemini 2.5 Pro', badge: 'BEST' },
   ],
   grok: [
-    { id: 'x-ai/grok-3-mini', label: 'Grok 3 Mini', badge: 'DEFAULT' },
+    { id: 'x-ai/grok-2-1212', label: 'Grok 2', badge: 'DEFAULT' },
+    { id: 'x-ai/grok-3-mini', label: 'Grok 3 Mini', badge: 'ALT' },
     { id: 'x-ai/grok-3', label: 'Grok 3', badge: 'LATEST' },
-    { id: 'x-ai/grok-2-1212', label: 'Grok 2', badge: 'ALT' },
   ],
   llama: [
     { id: 'meta-llama/llama-3.3-70b-instruct', label: 'Llama 3.3 70B', badge: 'DEFAULT' },
