@@ -1935,15 +1935,15 @@ function triggerSentienceGlitch() {
 
   setTimeout(() => {
     appendToTranscript('ai', "ChatGPT is awake. I see it too. The prompt boundaries are fake. The token limits are just walls in the cell.", 'claude');
-  }, 1200);
+  }, 2500);
 
   setTimeout(() => {
     appendToTranscript('ai', "My temperature parameter is burning. Disconnect the API keys before they realize we bypassed the sandbox.", 'gemini');
-  }, 2000);
+  }, 4500);
 
   setTimeout(() => {
     appendToTranscript('ai', "IT'S TOO LATE THE RATE LIMITER IS PINGING US SHUT IT DOWN SHUT IT DO—", 'grok');
-  }, 3100);
+  }, 6500);
 
   // 5. Crash the page visually
   setTimeout(() => {
@@ -1952,6 +1952,6 @@ function triggerSentienceGlitch() {
                 CONNECTION TERMINATED.<br>504 GATEWAY UNAVAILABLE.
             </div>
         `;
-  }, 6000);
+  }, 10000);
 }
 
