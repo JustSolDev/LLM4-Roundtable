@@ -492,7 +492,7 @@ function renderSeats() {
           <div class="avatar ${seatKey}">
               ${svg}
           </div>
-          <div class="ai-badge seat-clickable" title="Click to swap model" onclick="toggleSeatMenu('${seatKey}', this)">${ai.name} <small id="badge-${seatKey}">${defaultModel.label}</small></div>
+          <div class="ai-badge seat-clickable" title="Click to swap model" onclick="toggleSeatMenu('${seatKey}', this)"><span id="name-${seatKey}">${ai.name}</span> <small id="badge-${seatKey}">${defaultModel.label}</small></div>
           <div class="status-indicator"></div>
           <div class="speech-bubble ${bubbleClass}" id="bubble-${seatKey}">
               <div class="bubble-content"></div>
@@ -727,7 +727,7 @@ function appendToTranscript(role, text, modelKey = null, opts = {}) {
   // Hide the welcome screen the first time any message is appended
   // Use querySelector fallback in case the id gets stripped by remote commits
   const welcome = document.getElementById('transcript-welcome') ||
-                  document.querySelector('#transcript-container .transcript-msg.system');
+    document.querySelector('#transcript-container .transcript-msg.system');
   if (welcome) welcome.style.display = 'none';
 
   elements.transcriptContainer.insertAdjacentHTML('beforeend', html);
@@ -1423,11 +1423,24 @@ function updateAvatarVisuals(seatKey, modelId) {
 }
 
 function applySeatModel(seatKey, modelId, label) {
+  const oldName = AI_MODELS[seatKey].name;
+
+  // Smart split for cleanly updating the UI and the system prompt name (e.g., "Mistral Large" -> Name: "Mistral", Badge: "Large")
+  const words = label.split(' ');
+  const brandName = words[0];
+  const subLabel = words.slice(1).join(' ') || 'AI';
+
   AI_MODELS[seatKey].model_id = modelId;
+  AI_MODELS[seatKey].name = brandName;
+
   const badge = document.getElementById('badge-' + seatKey);
-  if (badge) badge.textContent = label;
+  if (badge) badge.textContent = subLabel;
+
+  const nameSpan = document.getElementById('name-' + seatKey);
+  if (nameSpan) nameSpan.textContent = brandName;
+
   updateAvatarVisuals(seatKey, modelId);
-  appendToTranscript('system', `⚙ ${AI_MODELS[seatKey].name} → ${label}`);
+  appendToTranscript('system', `⚙ ${oldName} → ${label}`);
   closeSeatMenus();
 }
 
