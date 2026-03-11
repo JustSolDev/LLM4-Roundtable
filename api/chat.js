@@ -186,11 +186,11 @@ export default async function handler(req, res) {
   }
 
   // ── Rate limiting ────────────────────────────────────────────
-  if (ENABLE_RATE_LIMIT) {
-    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim()
-      || req.socket?.remoteAddress
-      || 'unknown';
+  const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim()
+    || req.socket?.remoteAddress
+    || 'unknown';
 
+  if (ENABLE_RATE_LIMIT) {
     const rate = getRateStatus(ip);
     if (!rate.allowed) {
       Object.keys(corsHeaders).forEach(k => res.setHeader(k, corsHeaders[k]));

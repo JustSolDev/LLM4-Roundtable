@@ -52,3 +52,10 @@
   - ADDED: `ENABLE_RATE_LIMIT` developer toggle in `api/chat.js`.
   - INCREASED: Vercel serverless rate limit bumped from 20 to 200 requests per hour.
   - TESTED: Live deployment functionality and backend security verified using Browser Subagent against Victor's live site (llm4.xyz).
+[2026-03-10] [Antigravity] [API]
+- Increased `MAX_REQUESTS_PER_HOUR` to 200 in `api/chat.js`
+- Added `ENABLE_RATE_LIMIT` developer toggle
+- Verified IP rate limiting logic works correctly within the toggle block.
+
+[2026-03-10] [Antigravity] [Hotfix]
+- Fixed `ReferenceError: ip is not defined` in `api/chat.js` caused by placing the `ip` extraction inside the `ENABLE_RATE_LIMIT` block. Moved the variable to the broader function scope so subsequent abuse-checks and server logging can securely access the caller IP without crashing. Pushed hotfix immediately to Vercel.
